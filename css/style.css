@@ -391,13 +391,13 @@ svg {
 }
 
 #servicios {
-    height: 50vh;
+    height: 60vh;
     display: flex;
     background-color: var(--container-color);
 }
 
 .skills-title {
-    margin-bottom: 8px;
+    margin-bottom: 4px;
 }
 
 .skills-title span:nth-child(2) {
@@ -445,6 +445,7 @@ svg {
 .skills-list li {
     color: var(--title-color);
     font-weight: var(--font-regular);
+    font-size: var(--small-font-size);
 }
 
 .skills-list li::before {
@@ -466,7 +467,9 @@ svg {
 .content-info-services {
     margin-bottom: 25px;
 }
-
+.services-title{
+    font-size: var(--h3-font-size);
+}
 .services-title span:nth-child(2) {
     color: var(--first-color);
 }
@@ -573,7 +576,7 @@ footer {
     right: 8px;
     width: 40px;
     height: 40px;
-    background-color: var(--first-color);
+    background-color: var(--container-color);
     background-image: url('../src/img/arrow-up-line.png');
     background-position: center;
     background-repeat: no-repeat;
@@ -1088,5 +1091,169 @@ footer {
         justify-content: space-around;
         align-items: center;
         height: 100px;
+    }
+}
+@media (max-width: 400px) {
+    .navbar-toggle {
+        display: block;
+        color: var(--title-color);
+    }
+
+    .navbar-collapse {
+        display: none;
+    }
+
+    .navbar-collapse.open {
+        display: block;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 70%;
+        background-color: rgba(31, 35, 46, 0.925);
+        z-index: 1000 !important;
+        height: 100vh;
+    }
+
+    .close-btn {
+        display: block;
+    }
+
+    .navbar-nav {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20%;
+    }
+
+    .navbar-nav li {
+        margin: 20px 0;
+    }
+
+
+    .dropdown .dropdown-menu {
+        display: none;
+        position: static;
+    }
+
+    .dropdown.open .dropdown-menu {
+        display: block;
+        position: absolute;
+        right: 0;
+        top: 100%;
+    }
+
+    #home {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .home-icons-social {
+        justify-content: center;
+        align-items: center;
+    }
+
+    .home-blob {
+        width: 250px;
+        height: 250px;
+    }
+
+    #about {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .content-info-about {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .about-description {
+        padding: 20px;
+        text-align: center;
+    }
+
+    #servicios {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .icon_skills {
+        width: 20px;
+        height: 20px;
+        margin-left: 2px;
+        color: white;
+    }
+
+    #services {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: auto;
+    }
+
+    .card {
+        width: 80%;
+        padding: 15px;
+        height: 200px;
+    }
+
+    .content-cards {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card-logo {
+        margin-bottom: 5px;
+    }
+
+    .card-logo svg {
+        width: 30px;
+        height: 30px;
+    }
+
+    .card-title {
+        font-size: var(--smaller-font-size);
+        margin-bottom: 10px;
+    }
+
+    .card-body {
+        font-size: var(--smaller-font-size);
+        margin-bottom: 10px;
+    }
+
+    #portafolio {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    #contacto {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    footer {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px 0;
+    }
+
+    footer div {
+        margin-bottom: 10px;
+    }
+
+    .copy {
+        width: 80%;
+        text-align: center;
     }
 }
