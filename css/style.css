@@ -576,13 +576,15 @@ footer {
     right: 8px;
     width: 40px;
     height: 40px;
-    background-color: var(--container-color);
     background-image: url('../src/img/arrow-up-line.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: 24px;
     opacity: 0.7;
     transition: opacity 0.3s;
+    background-color: hsla(0, 0%, 10%, .3);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
 }
 
 .scroll-up:hover {
