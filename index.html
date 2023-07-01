@@ -9,6 +9,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
 </head>
 
 <body>
@@ -507,20 +510,20 @@
                 <div class="about-subtitle">
                     <h2>Contactame</h2>
                 </div>
-                <form action="" id="contact-form">
+                <form id="contact-form">
                     <div class="container-form">
-                        <input type="text" placeholder="Ingrese tu nombre">
+                        <input type="text" name="name" placeholder="Ingrese tu nombre" >
                     </div>
                     <div class="container-form ">
-                        <input type="text" placeholder="Ingrese tu correo">
+                        <input type="email" name="email" placeholder="Ingrese tu correo" >
                     </div>
                     <div class="container-form ">
-                        <textarea name="" id="" cols="30" rows="10" placeholder="Ingrese su mensaje"></textarea>
+                        <textarea name="message" id="" cols="30" rows="10" placeholder="Ingrese su mensaje" ></textarea>
                     </div>
                     <div class="services-button-contact">
-                        <a class="button" href="contactame">
+                        <button type="submit" class="button">
                             Enviar mensaje
-                        </a>
+                        </button>
                     </div>
                 </form>
             </div>
@@ -558,8 +561,7 @@
             </span>
         </div>
     </footer>
-    <script src="js/index.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+    <script src="js/index.js" defer></script>
     </script>
 </body>
 
