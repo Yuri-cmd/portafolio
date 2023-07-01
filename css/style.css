@@ -19,10 +19,14 @@
     --hue: 162;
     --first-color: #00B089;
     --first-color-alt: hsl(var(--hue), 56%, 35%);
-    --title-color: hsl(228, 8%, 95%);
+    --title-color: hsl(0, 0%, 0%);
     --text-color: hsl(228, 8%, 65%);
-    --body-color: hsl(228, 15%, 20%);
-    --container-color: hsl(228, 15%, 15%);
+    --body-color: hsl(0, 0%, 96%);
+    --container-color: hsl(0, 0%, 100%);
+    --navbar-color: #1A2028;
+    --input-text: black;
+    --navbar-text-color: #ffff;
+    --scroll-up-color: hsl(0, 0%, 10%);
 
     /*========== Font and typography ==========*/
     /*.5rem = 8px | 1rem = 16px ...*/
@@ -115,6 +119,21 @@ svg {
 }
 
 /*=============== REUSABLE CSS CLASSES ===============*/
+.dark-mode {
+    --hue: 162;
+    --first-color: #00B089;
+    --first-color-alt: hsl(var(--hue), 56%, 35%);
+    --title-color: hsl(228, 8%, 95%);
+    --text-color: hsl(228, 8%, 65%);
+    --body-color: hsl(228, 15%, 20%);
+    --container-color: hsl(228, 15%, 15%);
+    --navbar-color: #1A2028;
+    --scroll-up-color: hsla(0, 0%, 10%, .3);
+    --input-text: white;
+    --navbar-text-color: #ffff;
+    --scroll-up-color: hsl(0, 0%, 10%);
+}
+
 .container {
     max-width: 1120px;
     margin-inline: 1.5rem;
@@ -162,7 +181,7 @@ svg {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #1A2028;
+    background-color: var(--navbar-color);
     padding: 10px 10px;
     z-index: 1000;
 }
@@ -183,13 +202,13 @@ svg {
     margin-right: auto;
     padding: 14px 16px;
     text-decoration: none;
-    color: #333;
+    color: var(--navbar-text-color);
     font-weight: bold;
     font-size: var(--h1-font-size);
 }
 
 .navbar-brand span:nth-child(1) {
-    color: var(--title-color);
+    color: var(--navbar-text-color);
 }
 
 .navbar-brand span:nth-child(2) {
@@ -225,7 +244,7 @@ svg {
 }
 
 .navbar-nav li a {
-    color: var(--title-color);
+    color: var(--navbar-text-color);
     font-size: var(--font-semi-bold);
     font-size: var(--normal-font-size);
 }
@@ -247,11 +266,64 @@ svg {
     right: 0;
     top: 0;
     cursor: pointer;
-    color: var(--title-color);
+    color: var(--navbar-text-color);
 }
 
 .navbar-nav li a:hover {
     color: var(--first-color);
+}
+
+.switch-container{
+    display: flex; 
+}
+.switch-container h4{
+    font-weight: var(--font-medium);
+    color: var(--navbar-text-color);
+}
+.switch-container label{
+    margin-left: 4px;
+}
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 24px;
+}
+
+.switch input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    cursor: pointer;
+    background-color: #ccc;
+    transition: background-color 0.3s;
+    border-radius: 20px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: transform 0.3s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: gray;
+}
+
+input:checked+.slider:before {
+    transform: translateX(16px);
 }
 
 .active {
@@ -312,7 +384,7 @@ svg {
 }
 
 .home-greeting span:nth-child(1) {
-    color: #ffff;
+    color: var(--title-color);
 }
 
 .home-greeting span:nth-child(2) {
@@ -467,9 +539,11 @@ svg {
 .content-info-services {
     margin-bottom: 25px;
 }
-.services-title{
+
+.services-title {
     font-size: var(--h3-font-size);
 }
+
 .services-title span:nth-child(2) {
     color: var(--first-color);
 }
@@ -552,7 +626,7 @@ svg {
     border-radius: 10px;
     padding: 20px;
     background-color: var(--container-color);
-    color: #ffff;
+    color: var(--input-text);
 }
 
 .container-form textarea {
@@ -560,7 +634,7 @@ svg {
     border-radius: 10px;
     padding: 20px;
     background-color: var(--container-color);
-    color: #ffff;
+    color: var(--input-text);
 }
 
 footer {
@@ -582,7 +656,7 @@ footer {
     background-size: 24px;
     opacity: 0.7;
     transition: opacity 0.3s;
-    background-color: hsla(0, 0%, 10%, .3);
+    background-color: var(--scroll-up-color);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
 }
@@ -594,7 +668,7 @@ footer {
 @media (max-width: 768px) {
     .navbar-toggle {
         display: block;
-        color: var(--title-color);
+        color: var(--navbar-text-color);
     }
 
     .navbar-collapse {
@@ -907,7 +981,7 @@ footer {
 @media (min-width: 576px) and (max-width: 991.98px) and (orientation:portrait) {
     .navbar-toggle {
         display: block;
-        color: var(--title-color);
+        color: var(--navbar-text-color);
     }
 
     .navbar-collapse {
@@ -1096,10 +1170,11 @@ footer {
         height: 100px;
     }
 }
+
 @media (max-width: 400px) {
     .navbar-toggle {
         display: block;
-        color: var(--title-color);
+        color: var(--navbar-text-color);
     }
 
     .navbar-collapse {
