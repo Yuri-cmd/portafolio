@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(run)",
+      "Skill(run:*)",
+      "Bash(chromium-cli --session portafolio)",
+      "Bash(node -e \"require.resolve\\('playwright'\\)\")",
+      "PowerShell(Start-Process \"http://127.0.0.1:8899\")",
+      "Bash(curl -s http://127.0.0.1:8899/)",
+      "WebFetch(domain:apps.apple.com)",
+      "WebFetch(domain:play.google.com)",
+      "WebFetch(domain:github.com)",
+      "Bash(node --check \"C:\\\\laragon\\\\www\\\\portafolio\\\\js\\\\index.js\")",
+      "Bash(node -e \"require.resolve\\('jsdom'\\)\")",
+      "Bash(where msedgedriver *)",
+      "Bash(pip show *)",
+      "Bash(python3 -)",
+      "WebFetch(domain:deliverytruelove.com)",
+      "Bash(grep -n '</div>\\\\s*$' \"C:\\\\laragon\\\\www\\\\portafolio\\\\index.html\")",
+      "Bash(awk -F: '$1>195 && $1<235')"
+    ]
+  }
+}

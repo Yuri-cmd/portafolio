@@ -67,24 +67,91 @@ let toggleDarkModeButton = document.getElementById('toggleDarkMode');
 let body = document.body;
 let switchText = document.getElementById('switch-text');
 
+const DARK_MODE_LABELS = {
+  es: { toLight: 'Modo light', toDark: 'Modo dark' },
+  en: { toLight: 'Light mode', toDark: 'Dark mode' }
+};
+
+function updateDarkModeLabel() {
+  let labels = DARK_MODE_LABELS[currentLang];
+  switchText.innerHTML = toggleDarkModeButton.checked ? labels.toLight : labels.toDark;
+}
+
 if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
   body.classList.toggle('dark-mode');
-  switchText.innerHTML = 'Modo light';
   toggleDarkModeButton.checked = true;
 } else {
-  switchText.innerHTML = 'Modo dark';
   toggleDarkModeButton.checked = false;
 }
 toggleDarkModeButton.addEventListener('change', function() {
   body.classList.toggle('dark-mode');
-  if (toggleDarkModeButton.checked) {
-    switchText.innerHTML = 'Modo light';
-  } else {
-    switchText.innerHTML = 'Modo dark';
-  }
+  updateDarkModeLabel();
+});
+
+/**language toggle */
+let toggleLangButton = document.getElementById('toggleLang');
+let langText = document.getElementById('lang-text');
+let currentLang = localStorage.getItem('lang') || 'es';
+
+let translatableEls = document.querySelectorAll('[data-en]');
+translatableEls.forEach(function(el) {
+  el.dataset.es = el.textContent;
+});
+
+let placeholderEls = document.querySelectorAll('[data-en-placeholder]');
+placeholderEls.forEach(function(el) {
+  el.dataset.esPlaceholder = el.getAttribute('placeholder');
+});
+
+function applyLanguage(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+
+  translatableEls.forEach(function(el) {
+    el.textContent = lang === 'en' ? el.dataset.en : el.dataset.es;
+  });
+
+  placeholderEls.forEach(function(el) {
+    el.setAttribute('placeholder', lang === 'en' ? el.dataset.enPlaceholder : el.dataset.esPlaceholder);
+  });
+
+  langText.innerHTML = lang === 'en' ? 'ES' : 'EN';
+  toggleLangButton.checked = lang === 'en';
+  updateDarkModeLabel();
+}
+
+applyLanguage(currentLang);
+
+toggleLangButton.addEventListener('change', function() {
+  let next = toggleLangButton.checked ? 'en' : 'es';
+  applyLanguage(next);
+  localStorage.setItem('lang', next);
 });
 
 /**validacion de formulario */
+
+const FORM_MESSAGES = {
+  es: {
+    allRequired: 'Todos los campos son requeridos.',
+    nameLength: 'El nombre debe tener minimo 2 y maximo 30 caracteres.',
+    nameSpecialChars: 'El nombre no debe contener caracteres especiales.',
+    invalidEmail: 'El correo electrónico no es válido.',
+    messageTooLong: 'La descripción debe ser menor a 250 caracteres',
+    attention: '¡Atención!',
+    success: 'Correcto!',
+    successMsg: 'El correo se envio correctamente'
+  },
+  en: {
+    allRequired: 'All fields are required.',
+    nameLength: 'Name must be between 2 and 30 characters.',
+    nameSpecialChars: 'Name must not contain special characters.',
+    invalidEmail: 'Please enter a valid email address.',
+    messageTooLong: 'The message must be under 250 characters',
+    attention: 'Heads up!',
+    success: 'Success!',
+    successMsg: 'Your message was sent successfully'
+  }
+};
 
 document.addEventListener('DOMContentLoaded', function() {
   let form = document.getElementById('contact-form');
@@ -110,31 +177,33 @@ document.addEventListener('DOMContentLoaded', function() {
     email = email.trim();
 
     /**validaciones */
+    let msgs = FORM_MESSAGES[currentLang];
+
     if(name == "" || email == "" || message == ""){
-      mostrarError("Todos los campos son requeridos.");
+      mostrarError(msgs.allRequired);
       return false;
     }
     if(name < minLength || name >maxLength){
-      mostrarError("El nombre debe tener minimo 2 y maximo 30 caracteres.");
+      mostrarError(msgs.nameLength);
       return false;
     }else if(specialCharsRegex.test(name)){
-      mostrarError("El nombre no debe contener caracteres especiales.");
+      mostrarError(msgs.nameSpecialChars);
       return false;
     }
 
     if (!correoRegex.test(email)) {
-      mostrarError('El correo electrónico no es válido.');
+      mostrarError(msgs.invalidEmail);
       return false;
     }
 
     if(message > maxLengthMessage){
-      mostrarError('La descripción debe ser menor a 250 caracteres');
+      mostrarError(msgs.messageTooLong);
       return false;
     }
 
     emailjs.sendForm('service_v7v56yb', 'template_e8hahyd', "#contact-form", '4SEvjyy1v7aJnSu6T')
     .then(function(response) {
-      swal("Correcto!", "El correo se envio correctamente", "success");
+      swal(FORM_MESSAGES[currentLang].success, FORM_MESSAGES[currentLang].successMsg, "success");
     }, function(error) {
        console.log('FAILED...', error);
     });
@@ -142,5 +211,5 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function mostrarError(mensaje) {
-  swal("¡Atención!", mensaje, "info");
+  swal(FORM_MESSAGES[currentLang].attention, mensaje, "info");
 }
